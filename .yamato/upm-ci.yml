@@ -95,9 +95,9 @@ test_{{ platform.name }}_{{ editor.version }}:
   commands:
      - npm install upm-ci-utils@stable -g --registry https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-npm
      {% if platform.name == 'centOS' %}   
-     - DISPLAY=:0 upm-ci package test --unity-version {{ editor.version }} --package-path com.unity.formats.alembic --enable-code-coverage --code-coverage-options 'enableCyclomaticComplexity;generateHtmlReport'
-     {% else %}
-     - upm-ci package test --unity-version {{ editor.version }} --package-path com.unity.formats.alembic --enable-code-coverage --code-coverage-options 'enableCyclomaticComplexity;generateHtmlReport'  
+     - DISPLAY=:0 upm-ci package test --unity-version {{ editor.version }} --package-path com.unity.formats.alembic     
+      {% else %}
+     - upm-ci package test --unity-version {{ editor.version }} --package-path com.unity.formats.alembic
      {% endif %}
   artifacts:
     logs.zip:
