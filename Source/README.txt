@@ -1,6 +1,5 @@
 Building on any platform:
 1. Get the dependences:
-        HDF5 - a legacy file format
         ilmbase - utilities related to openexr
         Alembic - the package we're wrapping
         ispc - a compiler for vectorized math routines (gives a 3x speedup)
