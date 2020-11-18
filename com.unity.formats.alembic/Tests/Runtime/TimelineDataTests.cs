@@ -99,17 +99,6 @@ namespace UnityEditor.Formats.Alembic.Exporter.UnitTests
             yield return TestCubeContents(go);
         }
 
-        [UnityTest, UnityPlatform(exclude = new[] {RuntimePlatform.LinuxEditor})]
-        public IEnumerator TestArchiveType([Values(ArchiveType.Ogawa, ArchiveType.HDF5)] int archiveType)
-        {
-            director.Play();
-            exporter.Recorder.Settings.ExportOptions.ArchiveType = (ArchiveType)archiveType;
-            yield return RecordAlembic();
-            deleteFileList.Add(exporter.Recorder.Settings.OutputPath);
-            var go = TestAbcImported(exporter.Recorder.Settings.OutputPath);
-            yield return TestCubeContents(go);
-        }
-
         [UnityTest]
         public IEnumerator TestSwapHandedness([Values(true, false)] bool swap)
         {
@@ -210,7 +199,7 @@ namespace UnityEditor.Formats.Alembic.Exporter.UnitTests
             var root = PrefabUtility.InstantiatePrefab(go) as GameObject;
             var player = root.GetComponent<AlembicStreamPlayer>();
             var timeline = director.playableAsset as TimelineAsset;
-            var abcTrack = timeline.CreateTrack<AlembicTrack>(null,"");
+            var abcTrack = timeline.CreateTrack<AlembicTrack>(null, "");
             var clip = abcTrack.CreateClip<AlembicShotAsset>();
             var abcAsset = clip.asset as AlembicShotAsset;
             var refAbc = new ExposedReference<AlembicStreamPlayer> {exposedName = Guid.NewGuid().ToString()};
